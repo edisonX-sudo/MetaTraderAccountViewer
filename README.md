@@ -12,10 +12,10 @@
 Q&A:
 
 1.how 2 use Scriptable?  
-open tha app, click on the "+" button on right-top,
-past the code from MetaTraderAccountViewer.js and rename it as MetaTraderAccountViewer.
-And press the Home panel.
-Then add a widget of Scriptable at Home panel, select the script named as Scriptable.
+open Scriptable, click on the "+" button on right-top,
+past the code from MetaTraderAccountViewer.js and rename it as 'MetaTraderAccountViewer'.
+And return 2 the Home panel.
+Then add a widget of Scriptable at Home panel, select the script named as MetaTraderAccountViewer.
 Done!
 
 2.what we do after signing up the metaapi?  
@@ -24,6 +24,6 @@ and copy the account id as accountId of MetaTraderAccountViewer.
 copy API token as authToken of MetaTraderAccountViewer in [API Access page](https://app.metaapi.cloud/token).  
 
 3.how 2 make it work?  
-u r supposed to click the MetaTraderAccountViewer btn in Scriptable, and chose sign in 2 binding this widget 2 ur metaapi account. 
+u r supposed to click the MetaTraderAccountViewer btn in Scriptable first, and chose sign in 2 binding this widget 2 ur metaapi account. 
 
 
