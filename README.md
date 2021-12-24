@@ -1,7 +1,5 @@
 # MetaTraderAccountViewer(IOS widget)
 
----
-
 ![](https://github.com/xushunke/MetaTraderAccountViewer/blob/master/resource/img_prac.jpeg?raw=true)
 ![](https://github.com/xushunke/MetaTraderAccountViewer/blob/master/resource/img_m.jpeg?raw=true)
 💰: to have a quick view about ur metaTrader(4/5) Earnings through an IOS widget~  
