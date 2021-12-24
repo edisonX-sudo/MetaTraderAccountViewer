@@ -23,7 +23,7 @@ create a new account binding 2 ur metaTrader(4/5) account in [Account page](http
 and copy the account id as accountId of MetaTraderAccountViewer.
 copy API token as authToken of MetaTraderAccountViewer in [API Access page](https://app.metaapi.cloud/token).  
 
-3.how 2 make it work?
+3.how 2 make it work?  
 u r supposed to click the MetaTraderAccountViewer btn in Scriptable, and chose sign in 2 binding this widget 2 ur metaapi account. 
 
 
