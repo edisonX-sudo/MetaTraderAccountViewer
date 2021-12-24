@@ -172,8 +172,8 @@ class MetaTraderAccountViewer {
         let req = new Request(api)
         req.method = 'POST'
         req.headers = {"auth-token": this.authToken};
-        let resp = await req.loadJSON();
-        return [req.response['statusCode'], JSON.stringify(resp)];
+        let resp = await req.loadString();
+        return [req.response['statusCode'], resp];
     }
 
     async fetchAccountInfo() {
@@ -196,6 +196,8 @@ class MetaTraderAccountViewer {
 
 
     async test() {
+        // let ret = await this.deployMetaApi();
+        // console.log("MetaTraderAccountViewer:test:"+ret)
         if (config.runsInWidget) return
         this.widgetSize = 'small'
         let w1 = await this.render()
