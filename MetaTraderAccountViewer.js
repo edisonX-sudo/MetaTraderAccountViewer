@@ -182,7 +182,7 @@ class MetaTraderAccountViewer {
     async loadFavicon() {
         if (MetaTraderAccountViewer.icon)
             return MetaTraderAccountViewer.icon;
-        let req = new Request('https://metaapi.cloud/docs/client/images/favicon.ico')
+        let req = new Request('https://raw.githubusercontent.com/xushunke/MetaTraderAccountViewer/master/resource/favicon.ico')
         let loadImage = await req.loadImage();
         MetaTraderAccountViewer.icon = loadImage;
         console.log("MetaTraderAccountViewer:loadFavicon:" + req.response['statusCode'])
