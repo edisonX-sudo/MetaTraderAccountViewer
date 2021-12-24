@@ -1,4 +1,4 @@
-# MetaTraderAccountViewer
+# MetaTraderAccountViewer(IOS widget)
 
 ---
 ![](https://github.com/xushunke/MetaTraderAccountViewer/blob/master/resource/img_p.jpeg?raw=true)
