@@ -40,7 +40,7 @@ class MetaTraderAccountViewer {
                     Keychain.set(AUTH_TOKEN_KEY, configAlert.textFieldValue(1));
                     return;
                 case 1:
-                    let url="https://app.metaapi.cloud/sign-up"
+                    let url = "https://app.metaapi.cloud/sign-up"
                     Safari.open(url)
                     break;
                 case 2:
@@ -60,16 +60,16 @@ class MetaTraderAccountViewer {
     }
 
     async render() {
-        console.log(`Meta4AccountViewer:init:${this.accountId}@${this.authToken}`)
         if (!this.accountId || !this.authToken) {
             return await this.renderMsg('auth not found');
         }
         let info = await this.fetchAccountInfo();
         if (info['error'] === "TimeoutError") {
             let code = await this.deployMetaApi();
-            console.log("Meta4AccountViewer:render:" + code);
+            console.log("MetaTraderAccountViewer:render:" + code);
             info = await this.fetchAccountInfo();
         }
+        console.log("MetaTraderAccountViewer:render:" + JSON.stringify(info));
         if (this.widgetSize === 'medium') {
             return await this.renderSmall(info)
         } else if (this.widgetSize === 'large') {
@@ -180,11 +180,13 @@ class MetaTraderAccountViewer {
     }
 
     async loadFavicon() {
-        if (Meta4AccountViewer.icon)
-            return Meta4AccountViewer.icon;
+        if (MetaTraderAccountViewer.icon)
+            return MetaTraderAccountViewer.icon;
         let req = new Request('https://metaapi.cloud/docs/client/images/favicon.ico')
-        Meta4AccountViewer.icon = await req.loadImage();
-        return Meta4AccountViewer.icon;
+        let loadImage = await req.loadImage();
+        MetaTraderAccountViewer.icon = loadImage;
+        console.log("MetaTraderAccountViewer:loadFavicon:" + req.response['statusCode'])
+        return loadImage;
     }
 
 
