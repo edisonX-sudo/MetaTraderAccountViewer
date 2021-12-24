@@ -12,7 +12,7 @@
 Q&A:
 
 1.how 2 use Scriptable?  
-open Scriptable, click on the "+" button on the right-top,
+open Scriptable, click the "+" button on the right-top,
 past the code from MetaTraderAccountViewer.js and rename it as 'MetaTraderAccountViewer'.
 And return 2 the Home panel.
 Then add a widget of Scriptable at Home panel, select the script named as MetaTraderAccountViewer.
