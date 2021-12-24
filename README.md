@@ -1,6 +1,7 @@
 # MetaTraderAccountViewer(IOS widget)
 
 ---
+
 ![](https://github.com/xushunke/MetaTraderAccountViewer/blob/master/resource/img_prac.jpeg?raw=true)
 ![](https://github.com/xushunke/MetaTraderAccountViewer/blob/master/resource/img_m.jpeg?raw=true)
 💰: to have a quick view about ur metaTrader(4/5) Earnings through an IOS widget~  
@@ -9,6 +10,7 @@
    1. you need to sign up the [metaapi](https://app.metaapi.cloud) and bind ur metaTrader(4/5) account 2 ur metaapi account!
 
 ---
+
 Q&A:
 
 1.how 2 use Scriptable?  
