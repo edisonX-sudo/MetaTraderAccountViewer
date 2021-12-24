@@ -48,13 +48,15 @@ class MetaTraderAccountViewer {
                     Keychain.remove(AUTH_TOKEN_KEY);
                     return;
                 case 3:
-                    this.test();
+                    await this.test();
                     return;
                 default:
                     return
             }
         }
         let widget = await this.render();
+        if (!widget)
+            return;
         Script.setWidget(widget);
         Script.complete();
     }
@@ -65,8 +67,11 @@ class MetaTraderAccountViewer {
         }
         let info = await this.fetchAccountInfo();
         if (info['error'] === "TimeoutError") {
-            let code = await this.deployMetaApi();
-            console.log("MetaTraderAccountViewer:render:" + code);
+            let ret = await this.deployMetaApi();
+            console.log("MetaTraderAccountViewer:render:" + ret);
+            let code = ret[0];
+            if (code >= 400)
+                return;
             info = await this.fetchAccountInfo();
         }
         console.log("MetaTraderAccountViewer:render:" + JSON.stringify(info));
@@ -111,7 +116,7 @@ class MetaTraderAccountViewer {
         {
             let flTxt = w.addText(`${Number(remain).toFixed(2)}${currency}`)
             if (remain > 0)
-                flTxt.textColor = new Color("#1a08ee")
+                flTxt.textColor = new Color("#0e2ef8")
             else
                 flTxt.textColor = new Color("#de0f0f")
             flTxt.centerAlignText()
@@ -167,8 +172,8 @@ class MetaTraderAccountViewer {
         let req = new Request(api)
         req.method = 'POST'
         req.headers = {"auth-token": this.authToken};
-        await req.load();
-        return req.response['statusCode'];
+        let resp = await req.loadJSON();
+        return [req.response['statusCode'], JSON.stringify(resp)];
     }
 
     async fetchAccountInfo() {
