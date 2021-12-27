@@ -65,22 +65,27 @@ class MetaTraderAccountViewer {
         if (!this.accountId || !this.authToken) {
             return await this.renderMsg('auth not found');
         }
-        let info = await this.fetchAccountInfo();
-        if (info['error'] === "TimeoutError") {
-            let ret = await this.deployMetaApi();
-            console.log("MetaTraderAccountViewer:render:" + ret);
-            let code = ret[0];
-            if (code >= 400)
+        let {code: infoCode, resp: infoResp} = await this.fetchAccountInfo();
+        if (infoResp['error'] === "TimeoutError" || infoCode >= 400) {
+            let deployRet = await this.deployMetaApi();
+            let {code: deployCode, resp: deployResp} = deployRet;
+            console.log("MetaTraderAccountViewer:render:" + deployRet);
+            if (deployCode >= 400)
                 return;
-            info = await this.fetchAccountInfo();
+            let infoRet = await this.fetchAccountInfo();
+            infoCode = infoRet.code;
+            infoResp = infoRet.resp;
+            if (infoResp['error'] === "TimeoutError" || infoCode >= 400) {
+                return;
+            }
         }
-        console.log("MetaTraderAccountViewer:render:" + JSON.stringify(info));
+        console.log("MetaTraderAccountViewer:render:" + JSON.stringify({code: infoCode, resp: infoResp}));
         if (this.widgetSize === 'medium') {
-            return await this.renderSmall(info)
+            return await this.renderSmall(infoResp)
         } else if (this.widgetSize === 'large') {
-            return await this.renderLarge(info)
+            return await this.renderLarge(infoResp)
         } else {
-            return await this.renderSmall(info)
+            return await this.renderSmall(infoResp)
         }
     }
 
@@ -158,22 +163,13 @@ class MetaTraderAccountViewer {
         return await this.renderSmall(info);
     }
 
-    async checkMetaApiStatus() {
-        let api = `https://mt-provisioning-api-v1.agiliumtrade.agiliumtrade.ai/users/current/accounts`
-        let req = new Request(api)
-        req.method = 'GET'
-        req.headers = {"auth-token": this.authToken};
-        let res = await req.loadJSON()
-        return res[0]['connectionStatus'] === "CONNECTED";
-    }
-
     async deployMetaApi() {
         let api = `https://mt-provisioning-api-v1.agiliumtrade.agiliumtrade.ai/users/current/accounts/${this.accountId}/deploy?executeForAllReplicas=true`
         let req = new Request(api)
         req.method = 'POST'
         req.headers = {"auth-token": this.authToken};
         let resp = await req.loadString();
-        return [req.response['statusCode'], resp];
+        return {code: req.response['statusCode'], resp: resp};
     }
 
     async fetchAccountInfo() {
@@ -181,13 +177,14 @@ class MetaTraderAccountViewer {
         let req = new Request(api)
         req.method = 'GET'
         req.headers = {"auth-token": this.authToken};
-        return await req.loadJSON();
+        let resp = await req.loadJSON();
+        return {code: req.response['statusCode'], resp: resp};
     }
 
     async loadFavicon() {
         if (MetaTraderAccountViewer.icon)
             return MetaTraderAccountViewer.icon;
-        let req = new Request('https://raw.githubusercontent.com/xushunke/MetaTraderAccountViewer/master/resource/favicon.ico')
+        let req = new Request('https://s4.ax1x.com/2021/12/26/TwcNqO.png')
         let loadImage = await req.loadImage();
         MetaTraderAccountViewer.icon = loadImage;
         console.log("MetaTraderAccountViewer:loadFavicon:" + req.response['statusCode'])
