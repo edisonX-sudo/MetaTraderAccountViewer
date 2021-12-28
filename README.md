@@ -15,7 +15,7 @@ Q&A:
 open Scriptable, click the "+" button on the right-top,
 past the code from MetaTraderAccountViewer.js and rename it as 'MetaTraderAccountViewer'.
 And return 2 the Home panel.
-Then add a widget of Scriptable at Home panel, select the script named as MetaTraderAccountViewer.
+Then add a widget of Scriptable at Home panel, deep press 2 edit it, select the script named as MetaTraderAccountViewer.
 Done!
 
 2.what we do after signing up the metaapi?  
